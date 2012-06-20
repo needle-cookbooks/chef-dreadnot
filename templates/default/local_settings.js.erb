@@ -1,0 +1,48 @@
+exports.config = {
+  // The name of this Dreadnot instance, used for display
+  name: '<%= @dreadnot["instance_name"] %>',
+
+  // Each Dreadnot instance supports one environment such as 'dev', 'staging'
+  // or 'production'
+  env: '<%= @node.chef_environment %>',
+
+  // The data root Dreadnot will use
+  data_root: '<%= @dreadnot["data_root"] %>',
+
+  // Base URL to access dreadnot (used in IRC, email)
+  default_url: 'http://<%= @dreadnot["host"] %>/',
+
+  // Dreadnot uses an htpasswd file (with support for md5 and sha1) for auth
+  htpasswd_file: '<%= @node["deploy"]["shared_dir"] %>/htpasswd',
+
+  // Each stack represents a code base that should be deployed to one or more regions
+  stacks: {
+
+    // For a stack named 'webapp', there should be a 'webapp.js' file in the
+    // stacks directory
+    webapp: {
+      // What branch to look in for the latest revision of the code base
+      tip: 'master',
+
+      // How long to cache the latest revision of the code base
+      tip_ttl: 120 * 1000,
+
+      // What regions this stack should be deployed to
+      regions: ['all'],
+
+      // Stacks should implement dryrun for testing
+      dryrun: true
+    }
+  },
+
+  // The GitHub organization you provide is used to build URLs for your stacks
+  github: {
+    organization: '<%= @dreadnot["github_org"] %>'
+  },
+
+  // Plugins provide optional functionality such as notifications. Any plugins
+  // that are not configured won't be used.
+  plugins: {
+
+  }
+};
