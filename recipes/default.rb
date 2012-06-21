@@ -6,6 +6,12 @@ include_recipe "deploy_wrapper"
 data_bag_key = Chef::EncryptedDataBagItem.load_secret(node['data_bag_key'])
 secrets = Chef::EncryptedDataBagItem.load("secrets", node.chef_environment, data_bag_key)
 
+directory '/opt/needle/shared' do
+  owner 'root'
+  group 'root'
+  mode 0755
+end
+
 deploy_wrapper "dreadnot" do
   ssh_wrapper_dir '/opt/needle/shared'
   ssh_key_dir '/root/.ssh'
