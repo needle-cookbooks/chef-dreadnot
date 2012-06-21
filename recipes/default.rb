@@ -41,7 +41,6 @@ runit_service "dreadnot"
 
 deploy "/opt/needle/dreadnot/" do
     repository "dreadnot-stacks"
-    revision assets_revision
     symlinks.clear
     symlink_before_migrate.clear
     create_dirs_before_symlink.clear
