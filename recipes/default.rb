@@ -49,3 +49,6 @@ deploy "/opt/needle/dreadnot/" do
     ssh_wrapper '/opt/needle/shared/dreadnot_deploy_wrapper.sh'
 end
 
+link "/opt/needle/dreadnot/current/" do
+    to "/opt/needle/dreadnot/stacks/"
+end
