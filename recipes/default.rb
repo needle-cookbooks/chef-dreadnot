@@ -41,7 +41,7 @@ end
 runit_service "dreadnot"
 
 deploy "/opt/needle/dreadnot/" do
-    repository "git@github.com:needle/dreadnot-stacks.git"
+    repo "git@github.com:needle/dreadnot-stacks.git"
     symlinks.clear
     symlink_before_migrate.clear
     create_dirs_before_symlink.clear
