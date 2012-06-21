@@ -1,5 +1,6 @@
 include_recipe "apt"
 include_recipe "node::apt"
+include_recipe "base::deploy"
 include_recipe "deploy_wrapper"
 
 data_bag_key = Chef::EncryptedDataBagItem.load_secret(node['data_bag_key'])
