@@ -12,6 +12,12 @@ directory '/opt/needle/shared' do
   mode 0755
 end
 
+directory '/opt/needle/dreadnot' do
+  owner 'root'
+  group 'root'
+  mode 0755
+end
+
 deploy_wrapper "dreadnot" do
   ssh_wrapper_dir '/opt/needle/shared'
   ssh_key_dir '/root/.ssh'
