@@ -40,15 +40,11 @@ end
 
 runit_service "dreadnot"
 
-deploy "/opt/needle/dreadnot/" do
+deploy "/opt/needle/dreadnot" do
     repo "git@github.com:needle/dreadnot-stacks.git"
     symlinks.clear
     symlink_before_migrate.clear
     create_dirs_before_symlink.clear
     purge_before_symlink.clear
     ssh_wrapper '/opt/needle/shared/dreadnot_deploy_wrapper.sh'
-end
-
-link "/opt/needle/dreadnot/current/" do
-    to "/opt/needle/dreadnot/stacks/"
 end

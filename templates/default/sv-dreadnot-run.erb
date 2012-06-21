@@ -1,4 +1,4 @@
 #!/bin/bash
 cd /opt/needle/dreadnot/
 exec 2>&1
-exec dreadnot -p 80
+exec dreadnot -c ./local_settings.js -b ./current -p 80
