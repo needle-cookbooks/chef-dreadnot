@@ -4,6 +4,6 @@ description "Deploys and configures Dreadnot from Rackspace"
 license "Apache 2.0"
 version "0.0.1"
 
-%w{ node }.each do |cb|
+%w{ node base deploy_wrapper }.each do |cb|
   depends cb
 end
