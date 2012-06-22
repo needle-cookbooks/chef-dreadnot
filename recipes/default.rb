@@ -34,6 +34,13 @@ template '/opt/needle/dreadnot/local_settings.js' do
     variables( :dreadnot => node[:dreadnot] )
 end
 
+directory "/root/.chef/" do
+    owner "root"
+    group "root"
+    mode 0700
+end
+
+
 template '/root/.chef/knife.rb' do
     source 'knife.rb.erb'
     mode 0750
