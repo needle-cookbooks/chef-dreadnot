@@ -1,4 +1,5 @@
 #!/bin/bash
 cd /opt/needle/dreadnot/
+export NODE_PATH=$NODE_PATH:/usr/lib/node_modules/
 exec 2>&1
 exec dreadnot -c ./local_settings.js -b ./current -p 80
