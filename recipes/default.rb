@@ -59,3 +59,7 @@ deploy "/opt/needle/dreadnot" do
     purge_before_symlink.clear
     ssh_wrapper '/opt/needle/shared/dreadnot_deploy_wrapper.sh'
 end
+
+link "/opt/needle/dreadnot/stacks" do
+    to "/opt/needle/dreadnot/current"
+end
