@@ -34,7 +34,18 @@ template '/opt/needle/dreadnot/local_settings.js' do
     variables( :dreadnot => node[:dreadnot] )
 end
 
+template '/root/.chef/knife.rb' do
+    source 'knife.rb.erb'
+    mode 0750
+    owner 'root'
+    group 'root'
+end
+
 node_npm "dreadnot" do
+    action :install
+end
+
+node_npm "async" do
     action :install
 end
 
