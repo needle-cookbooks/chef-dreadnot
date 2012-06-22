@@ -34,6 +34,13 @@ template '/opt/needle/dreadnot/local_settings.js' do
     variables( :dreadnot => node[:dreadnot] )
 end
 
+template '/opt/needle/shared/redeploy_ssh_wrapper.sh' do
+    source 'redeploy_ssh_wrapper.sh.erb'
+    mode 0750
+    owner 'root'
+    group 'root'
+end
+
 directory "/root/.chef/" do
     owner "root"
     group "root"
