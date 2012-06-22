@@ -55,7 +55,7 @@ template '/root/.chef/knife.rb' do
     group 'root'
 end
 
-node_npm "dreadnot" do
+node_npm "https://github.com/needle/dreadnot/tarball/master" do
     action :install
 end
 
