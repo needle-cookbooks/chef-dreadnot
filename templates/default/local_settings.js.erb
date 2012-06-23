@@ -31,7 +31,12 @@ exports.config = {
       regions: ['all'],
 
       // Stacks should implement dryrun for testing
-      //dryrun: true
+      //dryrun: true,
+      jenkins_user: '<%= @secrets["dreadnot"]["jenkins_user"] %>',
+      jenkins_password: '<%= @secrets["dreadnot"]["jenkins_password"] %>',
+      jenkins_url: '<%= @secrets["dreadnot"]["jenkins_url"] %>',
+      jenkins_retry_delay: 6000,
+      jenkins_retry_attempts: 3
     }
   },
 
