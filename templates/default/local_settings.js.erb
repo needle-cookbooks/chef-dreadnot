@@ -10,7 +10,7 @@ exports.config = {
   data_root: '<%= @dreadnot["data_root"] %>',
 
   // Base URL to access dreadnot (used in IRC, email)
-  default_url: 'http://<%= @dreadnot["host"] %>/',
+  default_url: 'http://<%= @node["fqdn"] %>/',
 
   // Dreadnot uses an htpasswd file (with support for md5 and sha1) for auth
   htpasswd_file: '<%= @node["deploy"]["shared_dir"] %>/htpasswd',
