@@ -31,7 +31,7 @@ template '/opt/needle/dreadnot/local_settings.js' do
     mode 0750
     owner 'root'
     group 'root'
-    variables( :dreadnot => node[:dreadnot] )
+    variables( :dreadnot => node[:dreadnot], :secrets => secrets )
 end
 
 template '/opt/needle/shared/redeploy_ssh_wrapper.sh' do

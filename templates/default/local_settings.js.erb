@@ -45,7 +45,7 @@ exports.config = {
   plugins: {
       hipchat: {
       name: 'Dreadnot',
-      apiKey: '<%= @node["secrets"]["dreadnot"]["hipchat_api_key"] %>',
+      apiKey: '<%= @secrets["dreadnot"]["hipchat_api_key"] %>',
       rooms: [
         <%= @dreadnot["hipchat_rooms"].map{|r| r}.join(",") %>
       ]
