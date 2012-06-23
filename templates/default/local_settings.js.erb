@@ -43,6 +43,12 @@ exports.config = {
   // Plugins provide optional functionality such as notifications. Any plugins
   // that are not configured won't be used.
   plugins: {
-
+      hipchat: {
+      name: 'Dreadnot',
+      apiKey: '<%= @node["secrets"]["dreadnot"]["hipchat_api_key"] %>',
+      rooms: [
+        <%= @dreadnot["hipchat_rooms"].map{|r| r}.join(",") %>
+      ]
+    }
   }
 };
