@@ -26,12 +26,19 @@ deploy_wrapper "dreadnot" do
   sloppy true
 end
 
+service "dreadnot" do
+  stop_command "sv stop dreadnot"
+  restart_command "sv restart dreadnot"
+  supports :status => true, :restart => true
+end
+
 template '/opt/needle/dreadnot/local_settings.js' do
     source 'local_settings.js.erb'
     mode 0750
     owner 'root'
     group 'root'
     variables( :dreadnot => node[:dreadnot], :secrets => secrets )
+    notifies :restart, "service[dreadnot]"
 end
 
 template '/opt/needle/shared/redeploy_ssh_wrapper.sh' do
@@ -63,8 +70,6 @@ node_npm "async" do
     action :install
 end
 
-runit_service "dreadnot"
-
 deploy "/opt/needle/dreadnot" do
     repo "git@github.com:needle/dreadnot-stacks.git"
     symlinks.clear
@@ -72,8 +77,11 @@ deploy "/opt/needle/dreadnot" do
     create_dirs_before_symlink.clear
     purge_before_symlink.clear
     ssh_wrapper '/opt/needle/shared/dreadnot_deploy_wrapper.sh'
+    notifies :restart, "service[dreadnot]"
 end
 
 link "/opt/needle/dreadnot/stacks" do
     to "/opt/needle/dreadnot/current"
 end
+
+runit_service "dreadnot"
