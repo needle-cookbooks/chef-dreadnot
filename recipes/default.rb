@@ -64,10 +64,12 @@ end
 
 node_npm "https://github.com/needle/dreadnot/tarball/master" do
     action :install
+    notifies :restart, "service[dreadnot]"
 end
 
 node_npm "async" do
     action :install
+    notifies :restart, "service[dreadnot]"
 end
 
 deploy "/opt/needle/dreadnot" do
