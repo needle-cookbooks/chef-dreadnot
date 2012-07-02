@@ -37,7 +37,7 @@ template '/opt/needle/dreadnot/local_settings.js' do
     mode 0750
     owner 'root'
     group 'root'
-    variables( :dreadnot => node[:dreadnot], :secrets => secrets )
+    variables( :dreadnot => node[:dreadnot], :secrets => secrets, :partners => search(:partners, "*:*") )
     notifies :restart, "service[dreadnot]"
 end
 
