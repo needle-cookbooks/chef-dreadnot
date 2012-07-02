@@ -4,6 +4,13 @@ include_recipe "base::deploy"
 include_recipe "deploy_wrapper"
 include_recipe "runit"
 
+require "set"
+
+partners = Set.new()
+search(:node, "chef_environment:#{node[chef_environment]}} AND role:core") do |node|
+  partners.add(node['partners'])
+end
+
 data_bag_key = Chef::EncryptedDataBagItem.load_secret(node['data_bag_key'])
 secrets = Chef::EncryptedDataBagItem.load("secrets", node.chef_environment, data_bag_key)
 
@@ -37,7 +44,8 @@ template '/opt/needle/dreadnot/local_settings.js' do
     mode 0750
     owner 'root'
     group 'root'
-    variables( :dreadnot => node[:dreadnot], :secrets => secrets, :partners => search(:partners, "*:*") )
+    variables( :dreadnot => node[:dreadnot], :secrets => secrets,
+      :partners => partners)
     notifies :restart, "service[dreadnot]"
 end
 
