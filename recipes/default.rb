@@ -7,7 +7,7 @@ include_recipe "runit"
 require "set"
 
 partners = Set.new()
-search(:node, "chef_environment:#{node[chef_environment]}} AND role:core") do |node|
+search(:node, "chef_environment:#{node[chef][environment]}} AND role:core") do |node|
   partners.add(node['partners'])
 end
 
