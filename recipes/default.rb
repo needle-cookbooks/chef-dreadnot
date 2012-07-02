@@ -7,8 +7,8 @@ include_recipe "runit"
 require "set"
 
 partners = Set.new()
-search(:node, "chef_environment:#{node.chef_environment} AND role:core") do |node|
-  partners.add(node['partners'])
+search(:node, "chef_environment:#{node.chef_environment} AND roles:core") do |node|
+  partners.add(node['core']['partners'])
 end
 
 data_bag_key = Chef::EncryptedDataBagItem.load_secret(node['data_bag_key'])
