@@ -8,7 +8,9 @@ require "set"
 
 partners = Set.new()
 search(:node, "chef_environment:#{node.chef_environment} AND roles:core") do |node|
-  partners.add(node['core']['partners'])
+  node['core']['partners'].each do |partner|
+    partners.add(partner)
+  end
 end
 
 data_bag_key = Chef::EncryptedDataBagItem.load_secret(node['data_bag_key'])
