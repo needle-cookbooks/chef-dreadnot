@@ -36,9 +36,8 @@ deploy_wrapper "dreadnot" do
 end
 
 service "dreadnot" do
-  stop_command "sv stop dreadnot"
   restart_command "sv restart dreadnot"
-  supports :status => true, :restart => true
+  supports :restart => true
 end
 
 template '/opt/needle/dreadnot/local_settings.js' do
