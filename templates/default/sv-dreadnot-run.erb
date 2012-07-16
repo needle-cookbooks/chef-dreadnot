@@ -2,6 +2,6 @@
 cd /opt/needle/dreadnot/
 export NODE_PATH=$NODE_PATH:/usr/lib/node_modules/
 export PATH=$PATH:/usr/bin:/usr/local/bin
+export KNIFE_PATH=<%= @node['dreadnot']['knife_path'] %>
 exec 2>&1
 exec dreadnot -c ./local_settings.js -b ./current -p 80
-
