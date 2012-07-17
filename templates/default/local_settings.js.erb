@@ -58,7 +58,7 @@ exports.config = {
     <%= @partners.map{|n|
     "#{n}_assets: \{
       tip: \'master\',
-      git_url: \'git+ssh://partners@partner-repo.needle.com/#{n}.git\'
+      git_url: \'git+ssh://partners@partner-repo.needle.com/#{n}.git\',
       regions: [\'all\'],
     \}"}.join(',') %>
   },
