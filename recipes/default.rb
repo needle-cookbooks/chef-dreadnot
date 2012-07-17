@@ -95,4 +95,10 @@ link "/opt/needle/dreadnot/stacks" do
     to "/opt/needle/dreadnot/current"
 end
 
+partners.each do |p|
+  link "/opt/needle/dreadnot/stacks/#{p}_assets.js" do
+    to "/opt/needle/dreadnot/stacks/assets.js"
+  end
+end
+
 runit_service "dreadnot"
