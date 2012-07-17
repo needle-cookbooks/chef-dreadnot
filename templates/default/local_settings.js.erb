@@ -56,11 +56,11 @@ exports.config = {
     },
 
     <%= @partners.map{|n|
-    "#{n}_assets: {
-      tip: 'master',
-      git_url: 'git+ssh://partners@partner-repo.needle.com/#{n}.git'
-      regions: ['all'],
-    }".join(',') %>
+    "#{n}_assets: \{
+      tip: \'master\',
+      git_url: \'git+ssh://partners@partner-repo.needle.com/#{n}.git\'
+      regions: [\'all\'],
+    \}"}.join(',') %>
   },
 
   // The GitHub organization you provide is used to build URLs for your stacks
