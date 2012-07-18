@@ -49,12 +49,6 @@ exports.config = {
       //dryrun: true,
     },
 
-    assets: {
-      tip: 'master',
-      tip_ttl: 120 * 1000,
-      regions: [<%= @partners.map{|n| "\'#{n}\'"}.join(',') %>],
-    },
-
     <%= @partners.map{|n|
     "#{n}_assets: \{
       tip: \'master\',
