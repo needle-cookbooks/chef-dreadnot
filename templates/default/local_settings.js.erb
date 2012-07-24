@@ -54,7 +54,13 @@ exports.config = {
       tip: \'master\',
       git_url: \'git+ssh://partners@partner-repo.needle.com/#{n}.git\',
       regions: [\'#{n}\'],
-    \}"}.join(',') %>
+    \},"}.join(',') %>
+
+    "www.needle.com": {
+      tip: 'master',
+      tip_ttl: 120 * 1000,
+      regions: ['all']
+    }
   },
 
   // The GitHub organization you provide is used to build URLs for your stacks
