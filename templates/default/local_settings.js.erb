@@ -52,6 +52,7 @@ exports.config = {
     <%= @partners.map{|n|
     "\'#{n}_assets\': \{
       tip: \'master\',
+      tip_ttl: 120 * 1000,
       git_url: \'git+ssh://partners@partner-repo.needle.com/#{n}.git\',
       regions: [\'#{n}\'],
     \}"}.join(',') %>,
