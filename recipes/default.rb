@@ -71,6 +71,13 @@ template '/root/.chef/knife.rb' do
     group 'root'
 end
 
+template '/root/.ssh/config' do
+  source 'ssh_config.erb'
+  mode 0700
+  owner 'root'
+  group 'root'
+end
+
 node_npm "https://github.com/needle/dreadnot/tarball/master" do
     action :install
     notifies :restart, "service[dreadnot]"
