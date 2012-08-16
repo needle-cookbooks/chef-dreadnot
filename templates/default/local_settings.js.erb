@@ -53,6 +53,7 @@ exports.config = {
       tip: 'master',
       tip_ttl: 120 * 1000,
       regions: [<%= @partners.map{|n| "\'#{n}\'"}.join(',') %>],
+      named_locks: [<%= @partners.map{|n| "\'#{n}\'"}.join(',') %>],
       //dryrun: true,
     },
 
