@@ -1,2 +1,2 @@
 #!/bin/bash
-/usr/bin/ssh -i/root/.ssh/dreadnot_deploy_key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -l dreadnot "$@"
+/usr/bin/ssh -i/root/.ssh/dreadnot_deploy_key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o LogLevel=ERROR -l dreadnot "$@"
