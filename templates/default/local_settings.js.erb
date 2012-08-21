@@ -36,7 +36,11 @@ exports.config = {
     // stacks directory
     haystack: {
       // What branch to look in for the latest revision of the code base
+      <% if @node.chef_environment == "staging" %>
+      tip: 'staging',
+      <% else %>
       tip: 'master',
+      <% end %>
 
       // How long to cache the latest revision of the code base
       tip_ttl: 120 * 1000,
@@ -50,10 +54,14 @@ exports.config = {
     },
 
     core: {
+      <% if @node.chef_environment == "staging" %>
+      tip: 'staging',
+      <% else %>
       tip: 'master',
+      <% end %>
       tip_ttl: 120 * 1000,
       regions: [<%= @partners.map{|n| "\'#{n}\'"}.join(',') %>],
-      named_locks: [<%= @partners.map{|n| "\'#{n}\'"}.join(',') %>],
+      ignore_locks: true
       //dryrun: true,
     },
 
@@ -63,6 +71,7 @@ exports.config = {
       tip_ttl: 120 * 1000,
       git_url: \'git+ssh://partners@partner-repo.needle.com/#{n}.git\',
       regions: [\'#{n}\'],
+      ignore_locks: true,
     \}"}.join(',') %>,
 
     "www.needle.com": {
