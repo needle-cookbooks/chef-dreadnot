@@ -54,11 +54,7 @@ exports.config = {
     },
 
     core: {
-      <% if @node.chef_environment == "staging" %>
-      tip: 'staging',
-      <% else %>
       tip: 'master',
-      <% end %>
       tip_ttl: 120 * 1000,
       regions: [<%= @partners.map{|n| "\'#{n}\'"}.join(',') %>],
       ignore_locks: true
