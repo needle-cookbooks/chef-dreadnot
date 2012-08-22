@@ -106,6 +106,9 @@ partners.each do |p|
   link "/opt/needle/dreadnot/stacks/#{p}_assets.js" do
     to "/opt/needle/dreadnot/stacks/assets.js"
   end
+  link "/opt/needle/dreadnot/stacks/#{p}_core.js" do
+    to "/opt/needle/dreadnot/stacks/core.js"
+  end
 end
 
 runit_service "dreadnot"
