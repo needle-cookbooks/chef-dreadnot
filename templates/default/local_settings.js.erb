@@ -11,11 +11,11 @@ exports.config = {
 
   // Base URL to access dreadnot (used in IRC, email)
   <% if @node.chef_environment == "production" %>
-  default_url: 'http://dreadnot.needle.com',
+  default_url: 'https://dreadnot.needle.com',
   <% elsif @node.chef_environment == "staging" %>
-  default_url: 'http://dreadnot.stg.needle.com',
+  default_url: 'https://dreadnot.stg.needle.com',
   <% else %>
-  default_url: '<%= @node["fqdn"] %>',
+  default_url: 'https://<%= @node["fqdn"] %>',
   <% end %>
 
 
