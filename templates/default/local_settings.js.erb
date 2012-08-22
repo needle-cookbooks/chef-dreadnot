@@ -9,6 +9,8 @@ exports.config = {
   // The data root Dreadnot will use
   data_root: '<%= @dreadnot["data_root"] %>',
 
+  secure: true,
+
   // Base URL to access dreadnot (used in IRC, email)
   <% if @node.chef_environment == "production" %>
   default_url: 'https://dreadnot.needle.com',
