@@ -31,6 +31,8 @@ exports.config = {
   jenkins_retry_delay: 6000,
   jenkins_retry_attempts: 3,
 
+  sensu_url: '<%= @secrets["dreadnot"]["sensu_api_url"] %>',
+
   // Each stack represents a code base that should be deployed to one or more regions
   stacks: {
 
