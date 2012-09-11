@@ -20,6 +20,9 @@ exports.config = {
   default_url: 'https://<%= @node["fqdn"] %>',
   <% end %>
 
+  graphite_host: '<%= @node["dreadnot"]["graphite_host"] %>',
+  graphite_port: <%= @node['dreadnot']['graphite_port'] %>,
+
 
   // Dreadnot uses an htpasswd file (with support for md5 and sha1) for auth
   htpasswd_file: '<%= @node["deploy"]["shared_dir"] %>/htpasswd',
