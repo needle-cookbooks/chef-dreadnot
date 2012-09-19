@@ -23,6 +23,7 @@ exports.config = {
   graphite_host: '<%= @node["dreadnot"]["graphite_host"] %>',
   graphite_port: <%= @node['dreadnot']['graphite_port'] %>,
 
+  newrelic_api_key: '<%= @secrets["newrelic"]["license_key"] %>',
 
   // Dreadnot uses an htpasswd file (with support for md5 and sha1) for auth
   htpasswd_file: '<%= @node["deploy"]["shared_dir"] %>/htpasswd',
@@ -48,6 +49,8 @@ exports.config = {
       <% else %>
       tip: 'master',
       <% end %>
+
+      newrelic_application_id: '<%= @secrets["newrelic"]["app_id"] %>',
 
       // How long to cache the latest revision of the code base
       tip_ttl: 120 * 1000,
