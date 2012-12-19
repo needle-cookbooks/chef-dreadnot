@@ -13,8 +13,7 @@ search(:node, "chef_environment:#{node.chef_environment} AND roles:core") do |no
   end
 end
 
-data_bag_key = Chef::EncryptedDataBagItem.load_secret(node['data_bag_key'])
-secrets = Chef::EncryptedDataBagItem.load("secrets", node.chef_environment, data_bag_key)
+secrets = Secrets.load(node['data_bag_key'],node.chef_environment)
 
 directory '/opt/needle/shared' do
   owner 'root'
