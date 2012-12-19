@@ -112,3 +112,15 @@ partners.each do |p|
 end
 
 runit_service "dreadnot"
+
+if node.has_key?('ec2')
+  include_recipe "aws"
+
+  aws_resource_tag node['ec2']['instance_id'] do
+    aws_access_key secrets['aws']['haystack']['access_key_id']
+    aws_secret_access_key secrets['aws']['haystack']['secret_access_key']
+    tags({'Name'=>"Dreadnot Deploy Server (#{node.chef_environment.capitalize})",
+      'Environment'=>node.chef_environment})
+  end
+
+end
