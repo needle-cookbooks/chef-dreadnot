@@ -13,6 +13,8 @@ search(:node, "chef_environment:#{node.chef_environment} AND roles:core") do |no
   end
 end
 
+Chef::Log.debug('Found the following partners: ' + partners.inspect)
+
 secrets = Secrets.load(node['data_bag_key'],node.chef_environment)
 
 # discover graphite server, if we are running in client mode
