@@ -108,7 +108,7 @@ link ::File.join(node[:dreadnot][:path],"/stacks") do
 end
 
 partners.each do |p|
-  link ::File.join(node[:dreadnot][:path],"#{p}_assets.js") do
+  link ::File.join(node[:dreadnot][:path],"stacks","#{p}_assets.js") do
     to ::File.join(node[:dreadnot][:path],"stacks","assets.js")
   end
   link ::File.join(node[:dreadnot][:path],"stacks","#{p}_core.js") do
