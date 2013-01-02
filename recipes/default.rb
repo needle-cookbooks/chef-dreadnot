@@ -15,6 +15,12 @@ end
 
 secrets = Secrets.load(node['data_bag_key'],node.chef_environment)
 
+# discover graphite server, if we are running in client mode
+unless Chef::Config[:solo]
+  graphite_server = discovery_search('graphite_server')
+  node.set['dreadnot']['graphite_host'] = discovery_ipaddress(:remote_node => graphite_server)
+end
+
 directory '/opt/needle/shared' do
   owner 'root'
   group 'root'
