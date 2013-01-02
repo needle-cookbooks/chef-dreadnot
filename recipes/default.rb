@@ -21,7 +21,7 @@ directory '/opt/needle/shared' do
   mode 0755
 end
 
-directory '/opt/needle/dreadnot' do
+directory node[:dreadnot][:path] do
   owner 'root'
   group 'root'
   mode 0755
@@ -39,7 +39,7 @@ service "dreadnot" do
   supports :restart => true
 end
 
-template '/opt/needle/dreadnot/local_settings.js' do
+template ::File.join(node[:dreadnot][:path],'local_settings.js') do
     source 'local_settings.js.erb'
     mode 0750
     owner 'root'
@@ -87,7 +87,7 @@ node_npm "async" do
     notifies :restart, "service[dreadnot]"
 end
 
-deploy "/opt/needle/dreadnot" do
+deploy node[:dreadnot][:path] do
     repo "git@github.com:needle/dreadnot-stacks.git"
     symlinks.clear
     symlink_before_migrate.clear
@@ -97,16 +97,16 @@ deploy "/opt/needle/dreadnot" do
     notifies :restart, "service[dreadnot]"
 end
 
-link "/opt/needle/dreadnot/stacks" do
-    to "/opt/needle/dreadnot/current"
+link ::File.join(node[:dreadnot][:path],"/stacks") do
+    to ::File.join(node[:dreadnot][:path],"/current")
 end
 
 partners.each do |p|
-  link "/opt/needle/dreadnot/stacks/#{p}_assets.js" do
-    to "/opt/needle/dreadnot/stacks/assets.js"
+  link ::File.join(node[:dreadnot][:path],"#{p}_assets.js") do
+    to ::File.join(node[:dreadnot][:path],"stacks","assets.js")
   end
-  link "/opt/needle/dreadnot/stacks/#{p}_core.js" do
-    to "/opt/needle/dreadnot/stacks/core.js"
+  link ::File.join(node[:dreadnot][:path],"stacks","#{p}_core.js") do
+    to ::File.join(node[:dreadnot][:path],"stacks","core.js")
   end
 end
 

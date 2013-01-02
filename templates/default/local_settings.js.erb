@@ -1,13 +1,13 @@
 exports.config = {
   // The name of this Dreadnot instance, used for display
-  name: '<%= @dreadnot["instance_name"] %>',
+  name: '<%= @dreadnot[:instance_name] %>',
 
   // Each Dreadnot instance supports one environment such as 'dev', 'staging'
   // or 'production'
   env: '<%= @node.chef_environment %>',
 
   // The data root Dreadnot will use
-  data_root: '<%= @dreadnot["data_root"] %>',
+  data_root: '<%= @dreadnot[:data_path] %>',
 
   secure: true,
 
