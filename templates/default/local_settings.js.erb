@@ -62,15 +62,11 @@ exports.config = {
       //dryrun: true,
 
     },
-
-    <%= @partners.map{|n|
-    "\'#{n}_core\': \{
-      tip: \'master\',
+    'core': {
+      tip: 'master',
       tip_ttl: 120 * 1000,
-      git_url: \'git@github.com:needle/core.git\',
-      regions: [\'#{n}\']
-    \}"}.join(',') %>,
-
+      regions: [<% @partners.each do |p| %>'<%= p %>',<% end %>]
+    },
     <%= @partners.map{|n|
     "\'#{n}_assets\': \{
       tip: \'master\',
