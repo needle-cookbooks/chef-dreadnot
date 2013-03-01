@@ -12,13 +12,16 @@ exports.config = {
   secure: true,
 
   // Base URL to access dreadnot (used in IRC, email)
-  <% if @node.chef_environment == "production" %>
+  <% case node.chef_environment -%>
+  <% when 'production' -%>
   default_url: 'https://dreadnot.needle.com',
-  <% elsif @node.chef_environment == "staging" %>
+  <% when 'staging' -%>
   default_url: 'https://dreadnot.stg.needle.com',
-  <% else %>
-  default_url: 'https://<%= @node["fqdn"] %>',
-  <% end %>
+  <% when 'qa' -%>
+  default_url: 'https://dreadnot.qa.needle.com',
+  <% else -%>
+  default_url: 'https://<%= node["fqdn"] %>',
+  <% end -%>
 
   graphite_host: '<%= node["dreadnot"]["graphite_host"] %>',
   graphite_port: <%= node['dreadnot']['graphite_port'] %>,
@@ -44,11 +47,12 @@ exports.config = {
     // stacks directory
     haystack: {
       // What branch to look in for the latest revision of the code base
-      <% if @node.chef_environment == "staging" %>
+      <% case node.chef_environment -%>
+      <% when 'staging' -%>
       tip: 'staging',
-      <% else %>
+      <% else -%>
       tip: 'master',
-      <% end %>
+      <% end -%>
 
       newrelic_application_id: '<%= @secrets["newrelic"]["app_id"] %>',
 
