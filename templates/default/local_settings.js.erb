@@ -54,7 +54,7 @@ exports.config = {
       tip: 'master',
       <% end -%>
 
-      newrelic_application_id: '<%= @secrets["newrelic"]["app_id"] %>',
+      newrelic_application_id: '<%= @secrets["newrelic"]["haystack"]["app_id"] %>',
 
       // How long to cache the latest revision of the code base
       tip_ttl: 120 * 1000,
