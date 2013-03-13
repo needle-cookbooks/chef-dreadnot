@@ -67,6 +67,26 @@ exports.config = {
 
     },
 
+    'needler-registration': {
+      <% case node.chef_environment -%>
+      <% when 'staging' -%>
+      tip: 'staging',
+      <% else -%>
+      tip: 'master',
+      <% end -%>
+
+      newrelic_application_id: '<%= @secrets["newrelic"]["needler_registration"]["app_id"] %>',
+
+      // How long to cache the latest revision of the code base
+      tip_ttl: 120 * 1000,
+
+      // What regions this stack should be deployed to
+      regions: ['all'],
+
+      // Stacks should implement dryrun for testing
+      //dryrun: true,
+    },
+
     <%= @partners.map{|n|
     "\'#{n}_core\': \{
       tip: \'master\',
