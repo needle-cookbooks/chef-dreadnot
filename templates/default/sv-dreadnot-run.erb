@@ -1,6 +1,6 @@
 #!/bin/bash
 cd /opt/needle/dreadnot/
-export NODE_PATH=$NODE_PATH:/usr/lib/node_modules/
+export NODE_PATH=$NODE_PATH:/usr/lib/node_modules/:/usr/lib/node_modules/dreadnot/node_modules/
 export PATH=$PATH:/usr/bin:/usr/local/bin
 export KNIFE_PATH=<%= @node['dreadnot']['knife_path'] %>
 exec 2>&1

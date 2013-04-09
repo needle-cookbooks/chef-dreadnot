@@ -87,21 +87,23 @@ exports.config = {
       //dryrun: true,
     },
 
-    <%= @partners.map{|n|
-    "\'#{n}_core\': \{
-      tip: \'master\',
-      tip_ttl: 120 * 1000,
-      git_url: \'git@github.com:needle/core.git\',
-      regions: [\'#{n}\']
-    \}"}.join(',') %>,
+    <% unless @partners.empty? -%>
+      <%= @partners.map{|n|
+      "\'#{n}_core\': \{
+        tip: \'master\',
+        tip_ttl: 120 * 1000,
+        git_url: \'git@github.com:needle/core.git\',
+        regions: [\'#{n}\']
+      \}"}.join(',') %>,
 
-    <%= @partners.map{|n|
-    "\'#{n}_assets\': \{
-      tip: \'master\',
-      tip_ttl: 120 * 1000,
-      git_url: \'git+ssh://partners@partner-repo.needle.com/#{n}.git\',
-      regions: [\'#{n}\']
-    \}"}.join(',') %>,
+      <%= @partners.map{|n|
+      "\'#{n}_assets\': \{
+        tip: \'master\',
+        tip_ttl: 120 * 1000,
+        git_url: \'git+ssh://partners@partner-repo.needle.com/#{n}.git\',
+        regions: [\'#{n}\']
+      \}"}.join(',') %>,
+    <% end -%>
 
     "www.needle.com": {
       tip: 'master',

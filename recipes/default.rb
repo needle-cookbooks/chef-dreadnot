@@ -5,11 +5,14 @@ include_recipe "deploy_wrapper"
 include_recipe "runit"
 
 require "set"
+package "git-core"
 
 partners = Set.new()
-search(:node, "chef_environment:#{node.chef_environment} AND roles:core") do |node|
-  node['core']['partners'].each do |partner|
-    partners.add(partner)
+unless Chef::Config[:solo]
+  search(:node, "chef_environment:#{node.chef_environment} AND roles:core") do |node|
+    node['core']['partners'].each do |partner|
+      partners.add(partner)
+    end
   end
 end
 
@@ -90,11 +93,6 @@ node_npm "https://github.com/needle/dreadnot/tarball/master" do
     notifies :restart, "service[dreadnot]"
 end
 
-node_npm "async" do
-    action :install
-    notifies :restart, "service[dreadnot]"
-end
-
 deploy node[:dreadnot][:path] do
     repo "git@github.com:needle/dreadnot-stacks.git"
     symlinks.clear
@@ -102,6 +100,11 @@ deploy node[:dreadnot][:path] do
     create_dirs_before_symlink.clear
     purge_before_symlink.clear
     ssh_wrapper '/opt/needle/shared/dreadnot_deploy_wrapper.sh'
+    notifies :restart, "service[dreadnot]"
+end
+
+node_npm "async" do
+    action :install
     notifies :restart, "service[dreadnot]"
 end
 
