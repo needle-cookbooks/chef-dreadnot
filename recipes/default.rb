@@ -1,6 +1,6 @@
 include_recipe "apt"
 include_recipe "node::apt"
-include_recipe "base::deploy"
+include_recipe "needle-base::deploy"
 include_recipe "deploy_wrapper"
 include_recipe "runit"
 
