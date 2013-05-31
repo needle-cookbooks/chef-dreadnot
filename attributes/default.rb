@@ -1,6 +1,6 @@
 default[:dreadnot][:instance_name] = "Default"
-default[:dreadnot][:path] = "/opt/needle/dreadnot"
-default[:dreadnot][:data_path] = "/opt/needle/dreadnot/data/"
+default[:dreadnot][:path] = "/opt/dreadnot"
+default[:dreadnot][:data_path] = "/opt/dreadnot/data/"
 default[:dreadnot][:host] = "localhost"
 default[:dreadnot][:github_org] = "needle"
 default[:dreadnot][:knife_path] = "/usr/local/bin/knife"
