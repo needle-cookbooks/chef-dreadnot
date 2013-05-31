@@ -12,40 +12,31 @@ exports.config = {
   secure: true,
 
   // Base URL to access dreadnot (used in IRC, email)
-  <% case node.chef_environment -%>
-  <% when 'production' -%>
-  default_url: 'https://dreadnot.needle.com',
-  <% when 'staging' -%>
-  default_url: 'https://dreadnot.stg.needle.com',
-  <% when 'qa' -%>
-  default_url: 'https://dreadnot.qa.needle.com',
-  <% else -%>
   default_url: 'https://<%= node["fqdn"] %>',
-  <% end -%>
 
-  graphite_host: '<%= node["dreadnot"]["graphite_host"] %>',
-  graphite_port: <%= node['dreadnot']['graphite_port'] %>,
+  // graphite_host: '<%= node["dreadnot"]["graphite_host"] %>',
+  // graphite_port: <%= node['dreadnot']['graphite_port'] %>,
 
-  newrelic_license_key: '<%= @secrets["newrelic"]["license_key"] %>',
+  // newrelic_license_key: '<%= @secrets["newrelic"]["license_key"] %>',
 
   // Dreadnot uses an htpasswd file (with support for md5 and sha1) for auth
   htpasswd_file: '<%= node["deploy"]["shared_dir"] %>/htpasswd',
 
   // Jenkins config
-  jenkins_user: '<%= @secrets["dreadnot"]["jenkins_user"] %>',
-  jenkins_password: '<%= @secrets["dreadnot"]["jenkins_password"] %>',
-  jenkins_url: '<%= @secrets["dreadnot"]["jenkins_url"] %>',
-  jenkins_retry_delay: 6000,
-  jenkins_retry_attempts: 3,
+  // jenkins_user: '<%= @secrets["dreadnot"]["jenkins_user"] %>',
+  // jenkins_password: '<%= @secrets["dreadnot"]["jenkins_password"] %>',
+  // jenkins_url: '<%= @secrets["dreadnot"]["jenkins_url"] %>',
+  // jenkins_retry_delay: 6000,
+  // jenkins_retry_attempts: 3,
 
-  sensu_url: '<%= @secrets["dreadnot"]["sensu_api_url"] %>',
+  // sensu_url: '<%= @secrets["dreadnot"]["sensu_api_url"] %>',
 
   // Each stack represents a code base that should be deployed to one or more regions
   stacks: {
 
     // For a stack named 'webapp', there should be a 'webapp.js' file in the
     // stacks directory
-    haystack: {
+    webapp: {
       // What branch to look in for the latest revision of the code base
       <% case node.chef_environment -%>
       <% when 'staging' -%>
@@ -54,7 +45,7 @@ exports.config = {
       tip: 'master',
       <% end -%>
 
-      newrelic_application_id: '<%= @secrets["newrelic"]["haystack"]["app_id"] %>',
+      // newrelic_application_id: '<%= @secrets["newrelic"]["webapp"]["app_id"] %>',
 
       // How long to cache the latest revision of the code base
       tip_ttl: 120 * 1000,
@@ -65,50 +56,6 @@ exports.config = {
       // Stacks should implement dryrun for testing
       //dryrun: true,
 
-    },
-
-    'needler-registration': {
-      <% case node.chef_environment -%>
-      <% when 'staging' -%>
-      tip: 'staging',
-      <% else -%>
-      tip: 'master',
-      <% end -%>
-
-      newrelic_application_id: '<%= @secrets["newrelic"]["needler_registration"]["app_id"] %>',
-
-      // How long to cache the latest revision of the code base
-      tip_ttl: 120 * 1000,
-
-      // What regions this stack should be deployed to
-      regions: ['all'],
-
-      // Stacks should implement dryrun for testing
-      //dryrun: true,
-    },
-
-    <% unless @partners.empty? -%>
-      <%= @partners.map{|n|
-      "\'#{n}_core\': \{
-        tip: \'master\',
-        tip_ttl: 120 * 1000,
-        git_url: \'git@github.com:needle/core.git\',
-        regions: [\'#{n}\']
-      \}"}.join(',') %>,
-
-      <%= @partners.map{|n|
-      "\'#{n}_assets\': \{
-        tip: \'master\',
-        tip_ttl: 120 * 1000,
-        git_url: \'git+ssh://partners@partner-repo.needle.com/#{n}.git\',
-        regions: [\'#{n}\']
-      \}"}.join(',') %>,
-    <% end -%>
-
-    "www.needle.com": {
-      tip: 'master',
-      tip_ttl: 120 * 1000,
-      regions: ['all']
     }
   },
 
@@ -119,11 +66,11 @@ exports.config = {
 
   // Plugins provide optional functionality such as notifications. Any plugins
   // that are not configured won't be used.
-  plugins: {
-      hipchat: {
-      name: 'Dreadnot',
-      apiKey: '<%= @secrets['dreadnot']['hipchat_token'] %>',
-      rooms: [ '<%= @secrets['dreadnot']['hipchat_room'] %>' ]
-    }
-  }
+  // plugins: {
+  //     hipchat: {
+  //     name: 'Dreadnot',
+  //     apiKey: '<%= @secrets['dreadnot']['hipchat_token'] %>',
+  //     rooms: [ '<%= @secrets['dreadnot']['hipchat_room'] %>' ]
+  //   }
+  // }
 };
