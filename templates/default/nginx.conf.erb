@@ -1,0 +1,50 @@
+upstream app_server {
+    # fail_timeout=0 means we always retry an upstream even if it failed
+    # to return a good HTTP response (in case the gunicorn master nukes a
+    # single worker for timing out).
+
+    # for UNIX domain socket setups:
+    #server unix:/tmp/gunicorn.sock fail_timeout=0;
+
+    # for TCP setups, point these to your backend servers
+    server 127.0.0.1:<%= node['dreadnot']['listen_port'] %> fail_timeout=0;
+}
+
+server {
+    server_name dreadnot.*;
+    listen <%= node['dreadnot']['https_port'] %> ssl;
+
+    ssl_certificate /etc/ssl/private/needle-combined.crt;
+    ssl_certificate_key /etc/ssl/private/needle.key;
+
+    ssl_session_timeout 5m;
+
+    ssl_protocols SSLv2 SSLv3 TLSv1;
+    ssl_ciphers ALL:!ADH:!EXPORT56:!kEDH:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;
+    ssl_prefer_server_ciphers on;
+
+    location / {
+        if ($http_x_forwarded_proto != 'https') { set $rewrite_me 1; }
+
+        if ($scheme = https) { set $rewrite_me 0; }
+
+        if ($rewrite_me = 1) {
+            rewrite ^/(.*)$ https://$host$request_uri? permanent;
+        }
+
+        proxy_connect_timeout <%= node['dreadnot']['proxy_timeout'] %>;
+        proxy_read_timeout <%= node['dreadnot']['proxy_timeout'] %>;
+
+        # we don't want nginx trying to do something clever with
+        # redirects, we set the Host: header above already.
+        proxy_redirect off;
+        proxy_pass_header Server;
+        proxy_pass_request_headers on;
+        proxy_pass_request_body on;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_pass http://app_server;
+    }
+}
