@@ -16,4 +16,4 @@ suites:
 - name: default
   run_list: ['recipe[dreadnot::default]',
              'recipe[dreadnot::nginx]']
-  attributes: {'chef_environment': 'development'}
+  attributes: {}
