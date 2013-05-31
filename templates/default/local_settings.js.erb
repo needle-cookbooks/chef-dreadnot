@@ -17,46 +17,40 @@ exports.config = {
   // graphite_host: '<%= node["dreadnot"]["graphite_host"] %>',
   // graphite_port: <%= node['dreadnot']['graphite_port'] %>,
 
-  // newrelic_license_key: '<%= @secrets["newrelic"]["license_key"] %>',
+  // newrelic_license_key: 'license key',
 
   // Dreadnot uses an htpasswd file (with support for md5 and sha1) for auth
-  htpasswd_file: '<%= node["deploy"]["shared_dir"] %>/htpasswd',
+  // htpasswd_file: '/etc/htpasswd',
 
   // Jenkins config
-  // jenkins_user: '<%= @secrets["dreadnot"]["jenkins_user"] %>',
-  // jenkins_password: '<%= @secrets["dreadnot"]["jenkins_password"] %>',
-  // jenkins_url: '<%= @secrets["dreadnot"]["jenkins_url"] %>',
+  // jenkins_user: 'jenkins_user',
+  // jenkins_password: 'jenkins_passwd',
+  // jenkins_url: 'jenkins_url',
   // jenkins_retry_delay: 6000,
   // jenkins_retry_attempts: 3,
 
-  // sensu_url: '<%= @secrets["dreadnot"]["sensu_api_url"] %>',
+  // sensu_url: 'sensu_url',
 
   // Each stack represents a code base that should be deployed to one or more regions
   stacks: {
 
     // For a stack named 'webapp', there should be a 'webapp.js' file in the
     // stacks directory
-    webapp: {
-      // What branch to look in for the latest revision of the code base
-      <% case node.chef_environment -%>
-      <% when 'staging' -%>
-      tip: 'staging',
-      <% else -%>
-      tip: 'master',
-      <% end -%>
+    // webapp: {
+    //   // What branch to look in for the latest revision of the code base
+    //   tip: 'master',
+    //   // newrelic_application_id: 'app_id',
 
-      // newrelic_application_id: '<%= @secrets["newrelic"]["webapp"]["app_id"] %>',
+    //   // How long to cache the latest revision of the code base
+    //   tip_ttl: 120 * 1000,
 
-      // How long to cache the latest revision of the code base
-      tip_ttl: 120 * 1000,
+    //   // What regions this stack should be deployed to
+    //   regions: ['all'],
 
-      // What regions this stack should be deployed to
-      regions: ['all'],
+    //   // Stacks should implement dryrun for testing
+    //   //dryrun: true,
 
-      // Stacks should implement dryrun for testing
-      //dryrun: true,
-
-    }
+    // }
   },
 
   // The GitHub organization you provide is used to build URLs for your stacks
@@ -69,8 +63,8 @@ exports.config = {
   // plugins: {
   //     hipchat: {
   //     name: 'Dreadnot',
-  //     apiKey: '<%= @secrets['dreadnot']['hipchat_token'] %>',
-  //     rooms: [ '<%= @secrets['dreadnot']['hipchat_room'] %>' ]
+  //     apiKey: 'api_key',
+  //     rooms: [ 'notifications' ]
   //   }
   // }
 };

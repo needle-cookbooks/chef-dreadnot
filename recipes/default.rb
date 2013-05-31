@@ -1,13 +1,10 @@
 include_recipe "apt"
 include_recipe "node::apt"
-include_recipe "needle-base::deploy"
 include_recipe "deploy_wrapper"
 include_recipe "runit"
 
 require "set"
 package "git-core"
-
-secrets = Secrets.load(node['data_bag_key'], node.chef_environment)
 
 service "dreadnot" do
   restart_command "sv restart dreadnot"
@@ -18,6 +15,7 @@ directory node[:dreadnot][:path] do
   owner 'root'
   group 'root'
   mode 0755
+  recursive true
 end
 
 directory '/root/.ssh' do
@@ -31,7 +29,7 @@ template ::File.join(node[:dreadnot][:path],'local_settings.js') do
     mode 0750
     owner 'root'
     group 'root'
-    variables( :dreadnot => node[:dreadnot], :secrets => secrets )
+    variables( :dreadnot => node[:dreadnot] )
     notifies :restart, "service[dreadnot]"
 end
 
