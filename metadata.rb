@@ -8,4 +8,4 @@ version "0.1.2
   depends cb
 end
 
-depends "discovery", "~> 0.1.6"
+depends "discovery", "~> 0.2.1"
