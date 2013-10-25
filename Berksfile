@@ -9,3 +9,4 @@ cookbook 'chef-sensu-handler', chef_api: :config
 cookbook 'sysctl', '~> 0.3.2', chef_api: :config
 cookbook 'route53', chef_api: :config
 cookbook 'hosts', '~> 0.0.4', chef_api: :config
+cookbook 'discovery', '~> 0.2.1', chef_api: :config
